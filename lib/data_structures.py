@@ -77,30 +77,37 @@ def print_spiciest_foods(spicy_foods):
     
 #def average_heat_level(spicy_foods):
 
-def average_heat_level(spicy_foods):
-    total_heat_level = 0
+
+def get_average_heat_level(spicy_foods):
+    total_heat_level = sum(food["heat_level"] for food in spicy_foods)
     num_spicy_foods = len(spicy_foods)
-    
+
     if num_spicy_foods == 0:
-        return 0  
+        return 0
+
+    average_heat_level = total_heat_level / num_spicy_foods
+    print(f"Average Heat Level: {average_heat_level}")
+
+    return average_heat_level
+
+
     
-    for food in spicy_foods:
-        total_heat_level += food["heat_level"]
+
+
+def create_spicy_food(spicy_foods, new_spicy_food):
+    if not isinstance(new_spicy_food, dict):
+        print("new_spicy_food should be a dictionary.")
+        return spicy_foods
+
+    required_keys = {"name", "cuisine", "heat_level"}
+    if not required_keys.issubset(new_spicy_food.keys()):
+        print("new_spicy_food must contain 'name', 'cuisine', and 'heat_level'.")
+        return spicy_foods
+
+    spicy_foods.append(new_spicy_food)
+    print(f"Spicy food added")
     
-    return total_heat_level // num_spicy_foods
-
-    
-
-
-def create_spicy_food(spicy_foods, spicy_food):
-   spicy_foods.append(spicy_food)
-   return spicy_foods
-
-
-new_spicy_foods = create_spicy_food
-
-print(new_spicy_foods)
-
+    return spicy_foods
 
 
 
